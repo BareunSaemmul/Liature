@@ -1,20 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>개소리에이쳐</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js\main.js"></script>
+    <script src="http://www.blueb.co.kr/SRC2/swipemenu/jquery.touchSwipe.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Liature</title>
 </head>
 <body>
-   <div id="app">
-    <nav class="col-2 full">
-        
-    </nav>
-    <main>
-        <div class="container">
-            안녕세상
-        </div>
-    </main>
-   </div>
+    <div class="container">
+            <div id="sidebar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            </div>
+            <div class="main-content">
+            <div class="swipe-area"></div>
+            <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
+            <div class="content">
+            내용
+            </div>
+            </div>
+    </div>
+
 </body>
 </html>
