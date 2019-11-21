@@ -1,0 +1,50 @@
+@font-face{
+    font-family: 'yagiatte';
+    src: url();
+}
+
+body{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#bakc1{
+    position: relative;
+}
+
+#back2{
+    position: absolute;
+    top: 240px;
+    left: 680px;
+}
+
+#back3{
+    position: absolute;
+    text-align: center;
+    width: 550px;
+    margin-top: 30px;
+}
+
+#SNSimg{
+    margin-top: 35px;
+}
+
+.sns{
+    width: 500px;
+}
+
+h1{ 
+    font-size: 40px;
+    text-decoration-color: gray;
+}
+
+#main{
+    width: 1918px;
+    height: 1002px;
+}
+
+#background{
+    position: absolute;
+    display: flex;
+}
