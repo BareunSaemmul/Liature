@@ -7,6 +7,11 @@ html {
   font-weight: 100;
 }
 
+#logo{
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
 .container {
   position: relative;
   height: 100%;
@@ -26,7 +31,7 @@ html {
   width: 50px;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 2800px;
   background: #f3f3f3;
   z-index: 0;
 }
@@ -35,7 +40,7 @@ html {
   background: #DDDDDD;
   position: absolute;
   width: 240px;
-  height: 100%;
+  height: 2800px;
   left: -240px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -75,10 +80,10 @@ html {
   position: relative;
 }
 
-.main-content .content {
+.main-content, .content, .grapeWeather{
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  padding-left: 60px;
+  /* padding-left: 60px; */
   width: 100%;
 }
 
@@ -107,4 +112,127 @@ html {
   border-radius: 1px;
 }
 
-.main-content #sidebar-toggle .bar:last-child { margin-bottom: 0; }
+.main-content #sidebar-toggle .bar:last-child { 
+  margin-bottom: 0; 
+}
+
+.title{
+  font-weight: bold; 
+  font-size: 40px;
+}
+
+#weather{
+  height: 200px;
+  margin-left: 100px;
+}
+
+.mapping{
+  margin-right: 10px;
+}
+
+.temper{
+  font-weight: bold;
+  font-size: 80px;
+}
+
+.content{
+  display: inline-flex;
+  text-align: center;
+}
+
+.first{
+  display: block;
+  margin-left: 25%;
+}
+
+.tempInfo{
+  display: flex;
+  text-align: left;
+  margin: 20px 0px 0px 10px;
+}
+
+.feelinfTemp{
+  font-size: 20px;
+  margin: 10px 0px 0px 10px;
+}
+
+.compareTemp{
+  font-size: 25px;
+}
+
+.temp1{
+  margin-left: 50px;
+}
+
+.detail{
+  display: flex;
+  margin-top: 20px;
+}
+
+.detailTemp{
+  margin: 0 10px;
+}
+
+.grapeWeather{
+  text-align: center;
+  margin: 100px 0px;
+}
+
+#grape{
+  margin: 50px 0px 50px 0px;
+  width: 900px;
+}
+
+#colorPink{
+  color: #FF8080;
+}
+
+.chat{
+  text-align: right;
+  position: absolute;
+  margin-left: 400px;
+}
+
+#grape1{
+  /* margin: 50px 0px 50px 30px; */
+  width: 400px;
+  position: absolute;
+  top: 0;
+  margin-top: 50px;
+}
+
+.grape2{
+  position: relative;
+  margin-left: 400px;
+  margin-top: 300px;
+}
+
+#graptext{
+  margin: 80px 0px 0px 0px;
+}
+
+#graptext > div{
+  width: 360px;
+  padding: 20px 30px;
+  border-bottom: solid 1px #949494;
+}
+
+.temp12{
+  display: flex;
+  width: 1200px;
+  flex-wrap: wrap;
+}
+
+.temp12>img{
+  width: 500px;
+}
+
+#last{
+  width: 1000px;
+  margin-left: 20%;
+}
+
+#shelter{
+  text-align: left;
+  margin-left: 80px;
+}
