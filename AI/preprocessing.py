@@ -24,18 +24,19 @@ from pprint import pprint
 
 data = pd.read_csv('dataset.csv', encoding='UTF8')
 
-X = data['input']
-Y = data['output']
+X = data['input'].to_numpy()
+Y = data['output'].to_numpy()
+print(type(X), type(Y))
 
 t = Tokenizer()
-print(t)
+# print(t)
 t.fit_on_texts(X) 
-print(t)
+# print(t)
 sequences = t.texts_to_sequences(X)
-pprint(sequences)
+# pprint(sequences)
 
 w2i = t.word_index
-pprint(w2i)
+# pprint(w2i)
 
 vocab_size = len(w2i)+1
 print(vocab_size)
