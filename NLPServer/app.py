@@ -1,44 +1,42 @@
-from flask import Flask
-from flask_restful import Resource, Api, abort, reqparse
+#-*- coding:utf-8 -*-
+
+from flask import Flask, request, jsonify
+import requests
 
 app = Flask(__name__)
-api = Api(app)
 
 
-INFOS = {
-    'weather': {},
-    'shelter': {},
-    'disaster': {}
-}
+@app.route('/info/weather')
+def get_weather():
+    try:
+        args = request.args.to_dict()
+        print(args)
+        info = requests.get(f'api.openweathermap.org/data/2.5/weather?lat={args["lat"]}&lon={args["lon"]}&APPID=802a80fdfe342bbe836c82a46b9d2d23')
+        return jsonify({'weather': info['weather']['main'], 'temp': info['main']['temp'], 'humidity': info['main']['humidity']}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': str(e)}), 500
 
 
-def abort_if_info_doesnt_exist(info_id):
-    if info_id not in INFOS:
-        abort(404, message=f"Info {info_id} doesn't exist")
+@app.route('/info/shelter/')
+def get_shelter():
+    try:
+        args = request.args.to_dict()
+        info = requests.get(f'http://api.data.go.kr/openapi/clns-shunt-fclty-std?serviceKey=0xoZmFtpQb7pY6%2B3wv7k1SWquqsj0l09EnJSTZOY%2F4vJpBWltCpKmQa1KwZ%2FeIKQJRNZyHMnN8C6Gjxe1oiJbg%3D%3D&pageNo=1&numOfRows=5&type=json&latitude={args["lat"]}&hardness={args["lon"]}&openYn=Y')
+        print(info.text)
+        if 'NODATA_ERROR' in info.text:
+            raise Exception('no data')
+        else:
+            return jsonify({'name': info['clnsShuntFcltyNm'], 'location': info['rdnmadr']}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': str(e)}), 500
 
 
-parser = reqparse.RequestParser()
-parser.add_argument('task')
+@app.route('/info/disaster/')
+def get_disaster():
+    pass
 
-
-class Info(Resource):
-    def get(self, info_id):
-        abort_if_info_doesnt_exist(info_id)
-        return INFOS(info_id)
-
-
-class InfoList(Resource):
-    def get(self):
-        return INFOS
-
-    def post(self):
-        args = parser.parse_args()
-        info_id = 'info'
-        return INFOS[info_id], 201
-
-
-api.add_resource(InfoList, '/infos/')
-api.add_resource(Info, '/infos/<string:info_id')
 
 if __name__ == '__main__':
     app.run(debug=True)
