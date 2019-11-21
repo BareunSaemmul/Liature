@@ -12,5 +12,6 @@ import gensim
 
 model = gensim.models.Word2Vec.load('../../ko.bin')
 # result = model.wv.most_similar("땅 미친듯이 흔들림 진짜 뒤질거같아")
-print(model.wv.most_similar("강아지"))
+# print(model.wv.most_similar("강아지"))
+print(model.wv.rank())
 # print(result)
