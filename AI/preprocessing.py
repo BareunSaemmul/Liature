@@ -1,42 +1,54 @@
-# from konlpy.tag import Twitter
-# import pandas as pd
-# from collections import Counter
-
-# data = pd.read_csv('dataset.csv', encoding='UTF8')
-# s = ''
-# for i in data['input']:
-#     s += i + ' '
-
-# t = Twitter()
-# nouns = t.nouns(s)
-# count = Counter(nouns)
-# k_l = sorted(list(count.keys()), key=lambda k: count[k], reverse=True)
-
-# for i, k in zip(range(1, len(k_l)+1), k_l):
-#     count[k] = i
-
-# print(count)
-
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
 import pandas as pd
+import re
+from konlpy.tag import Okt
+import numpy as np
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
+import matplotlib.pyplot as plt
 from pprint import pprint
 
-data = pd.read_csv('dataset.csv', encoding='UTF8')
+data = pd.read_excel('./dataset.xlsx')
 
-X = data['input'].to_numpy()
-Y = data['output'].to_numpy()
-print(type(X), type(Y))
+X = data['input']
+Y = data['output']
 
-t = Tokenizer()
-# print(t)
-t.fit_on_texts(X) 
-# print(t)
-sequences = t.texts_to_sequences(X)
-# pprint(sequences)
+X = X.str.replace("[^ㄱ-ㅎㅏ-ㅣ가-힣 ]","") # 특수문자 제거
+stopwords=['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다'] # 불용어
 
-w2i = t.word_index
-# pprint(w2i)
+okt = Okt()
+x = []
+for sentence in X:
+    temp_X = []
+    temp_X = okt.morphs(sentence, stem=True) # 토큰화
+    temp_X = [word for word in temp_X if not word in stopwords] # 불용어 제거
+    x.append(temp_X)
+X = x
 
-vocab_size = len(w2i)+1
-print(vocab_size)
+max_words = 3000
+t = Tokenizer(num_words=max_words) # 상위 3000개의 단어만 보존
+t.fit_on_texts(X)
+X = t.texts_to_sequences(X)
+print(X[:5])
+
+print('리뷰의 최대 길이 :',max(len(l) for l in X))
+print('리뷰의 평균 길이 :',sum(map(len, X))/len(X))
+plt.hist([len(s) for s in X], bins=50)
+plt.xlabel('length of Data')
+plt.ylabel('number of Data')
+plt.show()
+
+max_len = 15
+X = pad_sequences(X, maxlen=max_len)
+
+y = []
+for i in range(len(Y)):
+    t = [0] * 5
+    t[Y[i]-1] = 1
+    y.append(t)
+Y = y
+
+print(X[:5])
+print(Y[:5])
+
+np.save('input.npy', np.array(X))
+np.save('output.npy', np.array(Y))
