@@ -9,6 +9,51 @@ $(window).load(function(){
 		container.classList.toggle("open-sidebar");
 	});
 
+	var chatSendContent = document.getElementById('chatSendContent');
+	var chatSendButton = document.getElementById('chatSendButton');
+
+	chatSendButton.addEventListener('click', () => {
+		if( chatSendContent.value == '' || chatSendContent.value == ' ') {
+			return
+		}
+		var chatMsgWrap = document.createElement('div');
+		var chatMsg2 = document.createElement('div');
+		var chatContent = document.createTextNode(chatSendContent.value);
+		var buf = chatSendContent.value;
+		chatMsgWrap.classList.add('chat-msg-wrap');
+		chatMsg2.classList.add('chat-msg2');
+
+		chatMsg2.appendChild(chatContent);
+		chatMsgWrap.appendChild(chatMsg2);
+
+		document.getElementsByClassName('chat-box-msg')[0].appendChild(chatMsgWrap);
+		
+		document.getElementById('chatSendContent').value = '';
+		///////////////////////////////////////////////////////////
+		setTimeout(function() {
+			var chatMsgWrap = document.createElement('div');
+			var chatMsg2 = document.createElement('div');
+			if(buf == '지진 나서 놀랐어요') {
+				var chatContent = document.createTextNode("그래도 약한 지진이라 다행이네요");
+			} else if (buf == '다들 놀랐을텐데 힘내세요') {
+				var chatContent = document.createTextNode("감사합니다");
+			} else if (buf == '우리나라에서도 지진이 일어나다니') {
+				var chatContent = document.createTextNode("아직 우리나라가 안전지대는 아닌가봐요");
+			} else {
+				var chatContent = document.createTextNode("지진 싫어요");
+			}
+
+			chatMsgWrap.classList.add('chat-msg-wrap');
+			chatMsg2.classList.add('chat-msg1');
+
+			chatMsg2.appendChild(chatContent);
+			chatMsgWrap.appendChild(chatMsg2);
+
+			document.getElementsByClassName('chat-box-msg')[0].appendChild(chatMsgWrap);
+			
+			document.getElementById('chatSendContent').value = '';
+		  }, 1000);
+	});
 	/*
 	$("[data-toggle]").click(function() {
 	  var toggle_el = $(this).data("toggle");
