@@ -15,6 +15,7 @@ class Liature_model:
         self.okt = Okt()
         with open('sentences.txt', 'rb') as f:
             X = pickle.load(f)
+            # print(X)
         max_words = 3000
         self.t = Tokenizer(num_words=max_words) # 상위 3000개의 단어만 보존
         self.t.fit_on_texts(X)
@@ -63,7 +64,7 @@ class Liature_model:
         preprocessed_data = self.preprocessing(input_data)
         # print(preprocessed_data)
         pred = []
-        for i in preprocessed_data:
+        for i in preprocessed_data: #리스트 컴프리핸션 추천드립니다
             pred.append(self.model.predict(np.array([i])))
         # answer = []
         for i in range(len(pred)):
@@ -77,7 +78,7 @@ class Liature_model:
         # while True:
         data = crawling.search(url)
         pred = self.predict(data)
-        print(pred)
+        print('예측 위험도: ' + str(max(pred)))
         # time.sleep(10)
         
 
@@ -89,4 +90,4 @@ model = Liature_model()
 #                 '방금 포항 지진났는데 왜 안 뜨나요ㅠㅠ 한참동안 안 그러다가 갑자기 그래서 진짜 놀랐네요', 
 #                 '포항 방금 지진 맞죠? 재난문자 아직도 안오네요', 
 #                 '포항 방금 지진 발생ㅠㅠ')
-model.search('지진')
+model.search('태풍')
