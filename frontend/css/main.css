@@ -173,6 +173,7 @@ html {
 .content{
   display: inline-flex;
   text-align: center;
+  margin-top: 30px;
 }
 
 .first{
