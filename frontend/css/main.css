@@ -273,6 +273,8 @@ html {
   padding: 10px 30px;
   box-sizing: border-box;
   position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .chat-msg-wrap {
