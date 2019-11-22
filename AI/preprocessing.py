@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
 import matplotlib.pyplot as plt
 from pprint import pprint
+import pickle
 
 data = pd.read_excel('./dataset.xlsx')
 
@@ -23,6 +24,8 @@ for sentence in X:
     temp_X = [word for word in temp_X if not word in stopwords] # 불용어 제거
     x.append(temp_X)
 X = x
+with open('sentences.txt', 'wb') as f:
+    pickle.dump(X, f)
 
 max_words = 3000
 t = Tokenizer(num_words=max_words) # 상위 3000개의 단어만 보존
