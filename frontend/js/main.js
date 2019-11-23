@@ -41,7 +41,7 @@ $(window).load(function(){
 			"밖에서 차가 갑자기 흔들렸어",
 			"영화보다가 지진나서 4D인 줄 알았어요",
 			"지진 때문에 집에 금 갔어요",
-		]
+		];
 		setTimeout(function() {
 			var chatMsgWrap = document.createElement('div');
 			var chatMsg2 = document.createElement('div');
